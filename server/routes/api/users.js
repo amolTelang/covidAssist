@@ -1,14 +1,17 @@
 const express = require('express');
 const router=express.Router();
 require('dotenv').config();
+const crypto=require('crypto');
 
 //setting up environment variables
-const accoundSid=process.env.ACCOUNT_SID;
+const accountSid=process.env.ACCOUNT_SID;
 const authToken=process.env.AUTH_TOKEN;
 const client=require('twilio')(accountSid,authToken);
-
+const twilioNum = process.env.TWILIO_PHONE_NUMBER;
+const jwt = require('jsonwebtoken');
 const JWT_AUTH_TOKEN=process.env.JWT_AUTH_TOKEN;
 const JWT_REFRESH_TOKEN=process.env.JWT_REFRESH_TOKEN;
+let refreshTokens = [];
 
 const smsKey=process.env.SMS_SECRET_KEY;
 
@@ -34,7 +37,7 @@ router.post('/sendOTP', (req, res) => {
 		.catch((err) => console.error(err));
 
 	// res.status(200).send({ phone, hash: fullHash, otp });  // this bypass otp via api only for development instead hitting twilio api all the time
-	res.status(200).send({ phone, hash: fullHash });          // Use this way in Production
+	res.status(200).send({ phone, hash: fullHash,otp });          // Use this way in Production
 });
 
 //@router POST api/verifyOTP
