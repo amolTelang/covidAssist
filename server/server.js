@@ -1,5 +1,13 @@
 const express = require('express');
 const connectDB=require('./config/db');
+require('dotenv').config();
+
+const accoundSid=process.env.ACCOUNT_SID;
+const authToken=process.env.AUTH_TOKEN;
+const client=require('twilio')(accountSid,authToken);
+const JWT_AUTH_TOKEN=process.env.JWT_AUTH_TOKEN;
+const JWT_REFRESH_TOKEN=process.env.JWT_REFRESH_TOKEN;
+const smsSceret=process.env.SMS_SECRET_KEY;
 
 
 const app=express();
