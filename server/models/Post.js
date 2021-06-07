@@ -17,7 +17,7 @@ const PostSchema=new mongoose.Schema({
     address:{
         type:String
     },
-    phno:{
+    phone:{
         type:String
     },
     type:{

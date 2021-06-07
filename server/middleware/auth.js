@@ -4,10 +4,6 @@ const jwt = require('jsonwebtoken');
 
 const JWT_REFRESH_TOKEN =process.env.JWT_REFRESH_TOKEN
 
-
-
-
-
 module.exports=async function authenticateUser(req, res, next) {
 	const accessToken = req.cookies.refreshToken;
 

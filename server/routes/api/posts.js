@@ -8,15 +8,19 @@ const User=require('../../models/User');
 //@router POST api/posts/bds
 //@desc post a BedShelter request 
 //@access private
-router.get('/bds',auth,async(req,res)=>{
+router.post('/bds',auth,async(req,res)=>{
     try {
-        const user=await User.findById(req.user.id);
+        const phone=req.body.phone;
+        console.log(phone);
+        const user=await User.findOne({phone});
         
+        console.log(user);
         const newPost=new Post({
+            user:req.user.id,
             name:user.name,
             location:req.body.location,
             quantity:req.body.quantity,
-            phno:req.body.phno,
+            phone:req.body.phone,
             text:req.body.text,
             lastTimeVerified:req.body.lastTimeVerified
         })
