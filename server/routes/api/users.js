@@ -2,7 +2,7 @@ const express = require('express');
 const router=express.Router();
 require('dotenv').config();
 const crypto=require('crypto');
-``
+
 //setting up environment variables
 const accountSid=process.env.ACCOUNT_SID;
 const authToken=process.env.AUTH_TOKEN;
@@ -15,14 +15,15 @@ let refreshTokens = [];
 const authenticateUser=require('../../middleware/auth')
 const smsKey=process.env.SMS_SECRET_KEY;
 
+const User=require('../../models/User');
 
-var userName=0;
+
 
 //@router POST api/sendOTP
 //@desc Register user
 //@access public
 router.post('/sendOTP', (req, res) => {
-	userName=req.body.name;
+	const userName=req.body.name;
 	const phone = req.body.phone;
 	const otp = Math.floor(100000 + Math.random() * 900000);
 	const ttl = 2 * 60 * 1000;
@@ -41,13 +42,14 @@ router.post('/sendOTP', (req, res) => {
 		.catch((err) => console.error(err));
 
 	// res.status(200).send({ phone, hash: fullHash, otp });  // this bypass otp via api only for development instead hitting twilio api all the time
-	res.status(200).send({ phone, hash: fullHash,otp });          // Use this way in Production
+	res.status(200).send({ phone, hash: fullHash,otp,userName });          // Use this way in Production
 });
 
 //@router POST api/verifyOTP
 //@desc verify otp recieved
 //@access public
-router.post('/verifyOTP', (req, res) => {
+router.post('/verifyOTP', async(req, res) => {
+	const userName=req.body.userName;
 	const phone = req.body.phone;
 	const hash = req.body.hash;
 	const otp = req.body.otp;
@@ -82,6 +84,20 @@ router.post('/verifyOTP', (req, res) => {
 				sameSite: 'strict'
 			})
 			.send({ msg: 'Device verified' });
+			
+			//checking if user exists if not then add him to the db
+
+			let user=await User.findOne({phone}) ;
+			if(!user){
+				user=new User({
+					userName,
+					phone
+				});
+				await user.save();
+				console.log(user);
+				console.log("user registered");
+			}
+
 	} else {
 		console.log('not authenticated');
 		return res.status(400).send({ verification: false, msg: 'Incorrect OTP' });

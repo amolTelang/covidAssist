@@ -1,11 +1,11 @@
 const mongoose=require('mongoose');
 
 const UserSchema=new mongoose.Schema({
-    name:{
+    userName:{
         type:String,
         required:true
     },
-    phno:{
+    phone:{
         type:String,
         required:true,
         unique:true
