@@ -2,7 +2,7 @@ const express = require('express');
 const router=express.Router();
 require('dotenv').config();
 const crypto=require('crypto');
-
+``
 //setting up environment variables
 const accountSid=process.env.ACCOUNT_SID;
 const authToken=process.env.AUTH_TOKEN;
@@ -15,10 +15,14 @@ let refreshTokens = [];
 const authenticateUser=require('../../middleware/auth')
 const smsKey=process.env.SMS_SECRET_KEY;
 
+
+var userName=0;
+
 //@router POST api/sendOTP
 //@desc Register user
 //@access public
 router.post('/sendOTP', (req, res) => {
+	userName=req.body.name;
 	const phone = req.body.phone;
 	const otp = Math.floor(100000 + Math.random() * 900000);
 	const ttl = 2 * 60 * 1000;
@@ -112,7 +116,7 @@ router.post('/home', authenticateUser, (req, res) => {
 // }
 
 
-//@router POST api/verifyOTP
+//@router POST api/refreshToken
 //@desc referesh token
 //@access public
 router.post('/refresh', (req, res) => {
