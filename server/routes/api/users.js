@@ -12,7 +12,7 @@ const jwt = require('jsonwebtoken');
 const JWT_AUTH_TOKEN=process.env.JWT_AUTH_TOKEN;
 const JWT_REFRESH_TOKEN=process.env.JWT_REFRESH_TOKEN;
 let refreshTokens = [];
-
+const authenticateUser=require('../../middleware/auth')
 const smsKey=process.env.SMS_SECRET_KEY;
 
 //@router POST api/sendOTP
@@ -92,24 +92,24 @@ router.post('/home', authenticateUser, (req, res) => {
 	res.status(202).send('Private Protected Route - Home');
 });
 
-async function authenticateUser(req, res, next) {
-	const accessToken = req.cookies.accessToken;
+// async function authenticateUser(req, res, next) {
+// 	const accessToken = req.cookies.accessToken;
 
-	jwt.verify(accessToken, JWT_AUTH_TOKEN, async (err, phone) => {
-		if (phone) {
-			req.phone = phone;
-			next();
-		} else if (err.message === 'TokenExpiredError') {
-			return res.status(403).send({
-				success: false,
-				msg: 'Access token expired'
-			});
-		} else {
-			console.log(err);
-			return res.status(403).send({ err, msg: 'User not authenticated' });
-		}
-	});
-}
+// 	jwt.verify(accessToken, JWT_AUTH_TOKEN, async (err, phone) => {
+// 		if (phone) {
+// 			req.phone = phone;
+// 			next();
+// 		} else if (err.message === 'TokenExpiredError') {
+// 			return res.status(403).send({
+// 				success: false,
+// 				msg: 'Access token expired'
+// 			});
+// 		} else {
+// 			console.log(err);
+// 			return res.status(403).send({ err, msg: 'User not authenticated' });
+// 		}
+// 	});
+// }
 
 
 //@router POST api/verifyOTP

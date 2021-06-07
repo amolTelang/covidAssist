@@ -32,6 +32,9 @@ const PostSchema=new mongoose.Schema({
     docrequired:{
         type:String
     },
+    lastTimeVerified:{
+        type:String
+    },
     text:{
         type:String
     }
