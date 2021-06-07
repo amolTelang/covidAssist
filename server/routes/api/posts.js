@@ -25,7 +25,7 @@ router.get('/bds',auth,async(req,res)=>{
         const post=await newPost.save();
         res.json(post);
 
-        
+
     } catch (error) {
         console.error(error.message);
         res.status(500).send('server error')
@@ -33,6 +33,6 @@ router.get('/bds',auth,async(req,res)=>{
 
 
 
-});
+});                                         
 
 module.exports=router;
