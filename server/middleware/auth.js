@@ -13,7 +13,7 @@ module.exports=async function authenticateUser(req, res, next) {
 
     // console.log(req);
 	jwt.verify(accessToken, JWT_REFRESH_TOKEN, async (err,decoded) => {
-		if (phone) {
+		if (decoded) {
 			req.user = decoded.user;
 			next();
 		} else if (err.message === 'TokenExpiredError') {
