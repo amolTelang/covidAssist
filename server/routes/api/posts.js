@@ -10,11 +10,10 @@ const User=require('../../models/User');
 //@access private
 router.post('/bds',auth,async(req,res)=>{
     try {
-        const phone=req.body.phone;
-        console.log(phone);
-        const user=await User.findOne({phone});
-        
-        console.log(user);
+        // const usrid=req.phone.user.id;
+        console.log(req);
+        const user=await User.findById(req.phone.user.id);
+    
         const newPost=new Post({
             user:req.user.id,
             name:user.name,
@@ -23,7 +22,7 @@ router.post('/bds',auth,async(req,res)=>{
             phone:req.body.phone,
             text:req.body.text,
             lastTimeVerified:req.body.lastTimeVerified
-        })
+        });
 
         //return post object to database
         const post=await newPost.save();
@@ -31,7 +30,7 @@ router.post('/bds',auth,async(req,res)=>{
 
 
     } catch (error) {
-        console.error(error.message);
+        console.error(error.message);98
         res.status(500).send('server error')
     }
 
