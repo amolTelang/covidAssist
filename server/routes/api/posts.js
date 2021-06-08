@@ -15,7 +15,7 @@ router.post('/bds',auth,async(req,res)=>{
     
         const newPost=new Post({
             user:req.user.id,
-            name:user.name,
+            name:req.body.name,
             location:req.body.location,
             quantity:req.body.quantity,
             phone:req.body.phone,
@@ -48,7 +48,7 @@ router.post('/oxygen',auth,async(req,res)=>{
     
         const newPost=new Post({
             user:req.user.id,
-            name:user.name,
+            name:req.body.name,
             location:req.body.location,
             quantity:req.body.quantity,
             phone:req.body.phone,
@@ -80,7 +80,7 @@ router.post('/medicine',auth,async(req,res)=>{
     
         const newPost=new Post({
             user:req.user.id,
-            name:user.name,
+            name:re.body.name,
             location:req.body.location,
             quantity:req.body.quantity,
             phone:req.body.phone,

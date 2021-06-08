@@ -37,6 +37,9 @@ const PostSchema=new Schema({
     },
     text:{
         type:String
+    },
+    otype:{
+        type:String
     }
 
 });
