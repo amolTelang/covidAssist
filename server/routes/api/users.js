@@ -151,37 +151,38 @@ router.post('/home', authenticateUser, (req, res) => {
 //@router POST api/refreshToken
 //@desc referesh token
 //@access public
-// router.post('/refresh', (req, res) => {
-// 	const refreshToken = req.cookies.refreshToken;
-// 	if (!refreshToken) return res.status(403).send({ message: 'Refresh token not found, login again' });
-// 	if (!refreshTokens.includes(refreshToken))
-// 		return res.status(403).send({ message: 'Refresh token blocked, login again' });
+router.post('/refresh', (req, res) => {
+	const refreshToken = req.cookies.refreshToken;
+	if (!refreshToken) return res.status(403).send({ message: 'Refresh token not found, login again' });
+	if (!refreshTokens.includes(refreshToken))
+		return res.status(403).send({ message: 'Refresh token blocked, login again' });
 
-// 	jwt.verify(refreshToken, JWT_REFRESH_TOKEN, (err, phone) => {
-// 		if (!err) {
-// 			const accessToken = jwt.sign({ data: phone }, JWT_AUTH_TOKEN, {
-// 				expiresIn: '30s'
-// 			});
-// 			return res
-// 				.status(200)
-// 				.cookie('accessToken', accessToken, {
-// 					expires: new Date(new Date().getTime() + 30 * 1000),
-// 					sameSite: 'strict',
-// 					httpOnly: true
-// 				})
-// 				.cookie('authSession', true, {
-// 					expires: new Date(new Date().getTime() + 30 * 1000),
-// 					sameSite: 'strict'
-// 				})
-// 				.send({ previousSessionExpired: true, success: true });
-// 		} else {
-// 			return res.status(403).send({
-// 				success: false,
-// 				msg: 'Invalid refresh token'
-// 			});
-// 		}
-// 	});
-// });
+	jwt.verify(refreshToken, JWT_REFRESH_TOKEN, (err, phone) => {
+		if (!err) {
+			const accessToken = jwt.sign({ data: phone }, JWT_AUTH_TOKEN, {
+				expiresIn: '30s'
+			});
+			return res
+				.status(200)
+				.cookie('accessToken', accessToken, {
+					expires: new Date(new Date().getTime() + 30 * 1000),
+					sameSite: 'strict',
+					httpOnly: true
+				})
+				.cookie('authSession', true, {
+					expires: new Date(new Date().getTime() + 30 * 1000),
+					sameSite: 'strict'
+				})
+				.send({ previousSessionExpired: true, success: true });
+		} else {
+			return res.status(403).send({
+				success: false,
+				msg: 'Invalid refresh token'
+			});
+		}
+		
+	});
+});
 
 router.get('/logout', (req, res) => {
 	res

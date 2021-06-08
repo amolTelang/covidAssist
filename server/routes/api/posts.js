@@ -11,8 +11,8 @@ const User=require('../../models/User');
 router.post('/bds',auth,async(req,res)=>{
     try {
         // const usrid=req.phone.user.id;
-        console.log(req);
-        const user=await User.findById(req.phone.user.id);
+        const obj=req.user;
+        const user=await User.findById(obj.id);
     
         const newPost=new Post({
             user:req.user.id,
