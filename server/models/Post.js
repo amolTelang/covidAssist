@@ -40,6 +40,10 @@ const PostSchema=new Schema({
     },
     otype:{
         type:String
+    },
+    date:{
+        type:Date,
+        default:Date.now
     }
 
 });

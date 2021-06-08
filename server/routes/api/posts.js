@@ -5,10 +5,51 @@ const Post=require('../../models/Post');
 const User=require('../../models/User');
 
 
+
+//@router GET api/posts/shelter
+//@desc get all posts specific to shelter  from the collections
+//@access private
+router.get('/shelter',auth,async(req,res)=>{
+    try {
+        const posts=await Post.find().sort({date :-1});
+        res.json(posts);  
+    } catch (error) {
+       console.error(error.message);
+       res.status(500).send('server error');
+    }
+});
+
+//@router GET api/posts/
+//@desc get all posts specific to oxygen  from the collections
+//@access private
+router.get('/oxygen',auth,async(req,res)=>{
+    try {
+        const posts=await Post.find().sort({date :-1});
+        res.json(posts);  
+    } catch (error) {
+       console.error(error.message);
+       res.status(500).send('server error');
+    }
+});
+
+//@router GET api/posts/
+//@desc get all posts specific to medicine the collections
+//@access private
+router.get('/medicine',auth,async(req,res)=>{
+    try {
+        const posts=await Post.find().sort({date :-1});
+        res.json(posts);  
+    } catch (error) {
+       console.error(error.message);
+       res.status(500).send('server error');
+    }
+});
+
+
 //@router POST api/posts/bds
 //@desc post a BedShelter request 
 //@access private
-router.post('/bds',auth,async(req,res)=>{
+router.post('/shelterAssist',auth,async(req,res)=>{
     try {
        
         const user=await User.findById(req.user.id);
@@ -41,7 +82,7 @@ router.post('/bds',auth,async(req,res)=>{
 //@router POST api/posts/bds
 //@desc post a BedShelter request 
 //@access private
-router.post('/oxygen',auth,async(req,res)=>{
+router.post('/oxygenAssist',auth,async(req,res)=>{
     try {
        
         const user=await User.findById(req.user.id);
@@ -73,7 +114,7 @@ router.post('/oxygen',auth,async(req,res)=>{
 //@router POST api/posts/bds
 //@desc post a BedShelter request 
 //@access private
-router.post('/medicine',auth,async(req,res)=>{
+router.post('/medicineAssist',auth,async(req,res)=>{
     try {
        
         const user=await User.findById(req.user.id);
