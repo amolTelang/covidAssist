@@ -1,13 +1,12 @@
+//modules
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
-
+//env of refresh token
 const JWT_REFRESH_TOKEN =process.env.JWT_REFRESH_TOKEN;
 
 
-
-
-
+//auth function to check  the token 
 module.exports=async function authenticateUser(req, res, next) {
 	const accessToken = req.cookies.refreshToken;
 

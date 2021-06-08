@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 //init express
 const app=express();
 
+
 //enable cross platfrom service
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(cookieParser());
