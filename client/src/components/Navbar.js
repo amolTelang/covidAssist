@@ -1,6 +1,6 @@
 import React from 'react'
 
-function NavSidebar() {
+function Navbar() {
     return (
  
         <div className="relative min-h-screen md:flex">
@@ -51,5 +51,5 @@ function NavSidebar() {
     )
 }
 
-export default NavSidebar
+export default Navbar;
 
