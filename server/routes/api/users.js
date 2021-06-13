@@ -62,7 +62,7 @@ router.post('/verifyOTP', async(req, res) => {
 	let data = `${phone}.${otp}.${expires}`;
 	let newCalculatedHash = crypto.createHmac('sha256', smsKey).update(data).digest('hex');
 	if (newCalculatedHash === hashValue) {
-		console.log('user confirmed');
+		
 		let user=await User.findOne({phone}) ;
 		if(!user){
 			user=new User({
@@ -70,7 +70,7 @@ router.post('/verifyOTP', async(req, res) => {
 				phone
 			});
 			await user.save();
-			console.log("user registered");
+			
 		}
 		const payload={
 			user:{
