@@ -1,61 +1,29 @@
 import React,{Fragment,useState} from 'react'
-import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {getOtp, verifyOtp} from '../../actions/auth';
+
+
 
 var hash;
-function LoginRegister() {
+const LoginRegister=({getOtp,verifyOtp})=> {
   
     const [formData,setFormData]=useState({
-        name:'',
+        userName:'',
         phone:'',
         otp:''
     });
 
-    const {name,phone,otp}=formData;
+    const {userName,phone,otp}=formData;
 
     const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value });
 
     const onClick1=async e=>{
-         const user={
-             name,
-             phone
-         }
-         try {
-             const config={
-                 headers:{
-                     'Content-Type':'application/json'
-                 }
-             }
-             const body=JSON.stringify(user);
-             const res=await axios.post('/api/users/sendOTP',body,config);
-             console.log(res.data);
-             hash=res.data.hash
-             console.log(hash);
-         } catch (error) {
-             console.error(error.response.data);
-         }
+        getOtp({userName,phone});
     }
     const onClick2=async e=>{
-      const user={
-          name,
-          phone,
-          hash,
-          otp
-      }
-      console.log(user);
-      try {
-        const config={
-            headers:{
-                'Content-Type':'application/json'
-            }
-        }
-        const body=JSON.stringify(user);
-        const res=await axios.post('/api/users/verifyOTP',body,config);
-        console.log(res.data);
-      } catch (error) {
-        console.error(error.response.data);
-      }
-    }
+        verifyOtp({userName,phone,hash,otp})
+     }
     return (
         <div className="bg-grey-lighter h-screen font-sans">
   <div className="container mx-auto h-full flex justify-center items-center">
@@ -65,7 +33,7 @@ function LoginRegister() {
         <div className="mb-4">
           <label className="font-bold text-grey-darker block mb-2">Name</label>
           <input type="text" className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow" placeholder="Your Username"
-            name='name' value={name} onChange={e=>onChange(e)} required />
+            name='userName' value={userName} onChange={e=>onChange(e)} required />
         </div>
 
         <div className="mb-4">
@@ -91,9 +59,11 @@ function LoginRegister() {
   </div>
 </div>
 
+    );
+};
 
-
-    )
-}
-
-export default LoginRegister
+LoginRegister.propTypes={
+    getOtp:PropTypes.func.isRequired,
+    verifyOtp:PropTypes.func.isRequired,
+};
+export default connect (null,{getOtp,verifyOtp})(LoginRegister);

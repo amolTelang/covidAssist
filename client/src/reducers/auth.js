@@ -1,22 +1,19 @@
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAIL,
     USER_LOADED,
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    ACCOUNT_DELETED
   } from '../actions/types';
   
   const initialState = {
-    token: cookies.get('accessToken'),
+    token: document.cookies.get('accessToken'),
     isAuthenticated: null,
     loading: true,
     user: null
   };
   
-  function authReducer(state = initialState, action) {
+  export default function(state = initialState, action) {
     const { type, payload } = action;
   
     switch (type) {
@@ -27,7 +24,6 @@ import {
           loading: false,
           user: payload
         };
-      case REGISTER_SUCCESS:
       case LOGIN_SUCCESS:
         return {
           ...state,
@@ -35,12 +31,11 @@ import {
           isAuthenticated: true,
           loading: false
         };
-       case REGISTER_FAIL:
-       case ACCOUNT_DELETED:
+      case LOGIN_FAIL:
       case AUTH_ERROR:
       case LOGOUT:
-            cookies.remove('accessToken');
-            cookies.remove('refreshToken');
+            document.cookies.remove('accessToken');
+            document.cookies.remove('refreshToken');
             return{
                 ...state,
                 token:null,
