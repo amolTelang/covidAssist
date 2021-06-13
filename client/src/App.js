@@ -10,10 +10,10 @@ const App=()=>{
   return (
     <Router>
         <Route exact path='/' component={Landing}/>
-          <switch>
+          <Switch>
           <Route exact path="/login" component={LoginRegister}/>
           <Route exact path="/otpVerify" component={OtpVerify}/>
-          </switch>
+          </Switch>
      
     </Router>
   )}
