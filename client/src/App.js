@@ -12,6 +12,7 @@ const App=()=>{
         <Route exact path='/' component={Landing}/>
           <switch>
           <Route exact path="/login" component={LoginRegister}/>
+          <Route exact path="/otpVerify" component={OtpVerify}/>
           </switch>
      
     </Router>
