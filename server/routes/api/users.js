@@ -23,7 +23,7 @@ const User=require('../../models/User');
 //@desc Register user
 //@access public
 router.post('/sendOTP', (req, res) => {
-	const userName=req.body.name;
+	const userName=req.body.userName;
 	const phone = req.body.phone;
 	const otp = Math.floor(100000 + Math.random() * 900000);
 	const ttl = 2 * 60 * 1000;
