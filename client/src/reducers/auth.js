@@ -1,13 +1,14 @@
 import {
-    USER_LOADED,
+    LOAD_USER,
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
   } from '../actions/types';
-  
+  import Cookies from 'js-cookie';
+
   const initialState = {
-    token: document.cookies.get('accessToken'),
+    token: Cookies.get('accessToken'),
     isAuthenticated: null,
     loading: true,
     user: null
@@ -17,14 +18,8 @@ import {
     const { type, payload } = action;
   
     switch (type) {
-      case USER_LOADED:
-        return {
-          ...state,
-          isAuthenticated: true,
-          loading: false,
-          user: payload
-        };
       case LOGIN_SUCCESS:
+    case LOAD_USER:
         return {
           ...state,
           ...payload,
@@ -34,8 +29,8 @@ import {
       case LOGIN_FAIL:
       case AUTH_ERROR:
       case LOGOUT:
-            document.cookies.remove('accessToken');
-            document.cookies.remove('refreshToken');
+            Cookies.remove('accessToken');
+            Cookies.remove('refreshToken');
             return{
                 ...state,
                 token:null,

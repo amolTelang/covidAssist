@@ -1,4 +1,5 @@
 import React,{Fragment,useState} from 'react'
+import {Link,Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {getOtp, verifyOtp} from '../../actions/auth';
@@ -6,7 +7,7 @@ import {getOtp, verifyOtp} from '../../actions/auth';
 
 
 var hash;
-const LoginRegister=({getOtp,verifyOtp})=> {
+const LoginRegister=({getOtp,verifyOtp,isAuthenticated})=> {
   
     const [formData,setFormData]=useState({
         userName:'',
@@ -23,6 +24,12 @@ const LoginRegister=({getOtp,verifyOtp})=> {
     }
     const onClick2=async e=>{
         verifyOtp({userName,phone,hash,otp})
+     }
+
+     //redirect 
+     if(isAuthenticated)
+     {
+        return <Redirect to='/oxygen'/>
      }
     return (
         <div className="bg-grey-lighter h-screen font-sans">
@@ -62,8 +69,12 @@ const LoginRegister=({getOtp,verifyOtp})=> {
     );
 };
 
+const mapStateToProps=state=>({
+    isAuthenticated:state.auth.isAuthenticated
+})
 LoginRegister.propTypes={
     getOtp:PropTypes.func.isRequired,
     verifyOtp:PropTypes.func.isRequired,
+    isAuthenticated:PropTypes.bool.isRequired
 };
 export default connect (null,{getOtp,verifyOtp})(LoginRegister);
