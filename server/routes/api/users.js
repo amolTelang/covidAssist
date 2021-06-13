@@ -41,15 +41,15 @@ router.post('/sendOTP', (req, res) => {
 		.then((messages) => console.log(messages))
 		.catch((err) => console.error(err));
 
-	// res.status(200).send({ phone, hash: fullHash, otp });  // this bypass otp via api only for development instead hitting twilio api all the time
-	res.status(200).send({ phone, hash: fullHash,otp,userName });          // Use this way in Production
+	// // res.status(200).send({ phone, hash: fullHash, otp });  // this bypass otp via api only for development instead hitting twilio api all the time
+	 res.status(200).send({ phone, hash: fullHash,otp,userName });          // Use this way in Production
 });
 
 //@router POST api/verifyOTP
 //@desc verify otp recieved
 //@access public
 router.post('/verifyOTP', async(req, res) => {
-	const userName=req.body.userName;
+	const userName=req.body.name;
 	const phone = req.body.phone;
 	const hash = req.body.hash;
 	const otp = req.body.otp;
@@ -64,12 +64,6 @@ router.post('/verifyOTP', async(req, res) => {
 	if (newCalculatedHash === hashValue) {
 		console.log('user confirmed');
 		let user=await User.findOne({phone}) ;
-		
-		const payload={
-			user:{
-				id:user.id
-			}
-		};
 		if(!user){
 			user=new User({
 				userName,
@@ -78,6 +72,12 @@ router.post('/verifyOTP', async(req, res) => {
 			await user.save();
 			console.log("user registered");
 		}
+		const payload={
+			user:{
+				id:user.id
+			}
+		};
+		
 		
 		const accessToken = jwt.sign(payload, JWT_AUTH_TOKEN, { expiresIn: '30s' });
 		const refreshToken = jwt.sign( payload, JWT_REFRESH_TOKEN, { expiresIn: '1y' });

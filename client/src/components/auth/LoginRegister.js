@@ -1,23 +1,24 @@
 import React,{Fragment,useState} from 'react'
 import axios from 'axios';
-
 import {Link} from 'react-router-dom';
-function LoginRegister() {
 
+var hash;
+function LoginRegister() {
+  
     const [formData,setFormData]=useState({
         name:'',
-        phno:''
+        phone:'',
+        otp:''
     });
 
-    const {name,phno}=formData;
+    const {name,phone,otp}=formData;
 
     const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value });
 
-    const onClick=async e=>{
-        
+    const onClick1=async e=>{
          const user={
              name,
-             phno
+             phone
          }
          try {
              const config={
@@ -26,11 +27,34 @@ function LoginRegister() {
                  }
              }
              const body=JSON.stringify(user);
-             const res=await axios.post('/api/users',body,config);
+             const res=await axios.post('/api/users/sendOTP',body,config);
              console.log(res.data);
+             hash=res.data.hash
+             console.log(hash);
          } catch (error) {
              console.error(error.response.data);
          }
+    }
+    const onClick2=async e=>{
+      const user={
+          name,
+          phone,
+          hash,
+          otp
+      }
+      console.log(user);
+      try {
+        const config={
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }
+        const body=JSON.stringify(user);
+        const res=await axios.post('/api/users/verifyOTP',body,config);
+        console.log(res.data);
+      } catch (error) {
+        console.error(error.response.data);
+      }
     }
     return (
         <div className="bg-grey-lighter h-screen font-sans">
@@ -47,11 +71,19 @@ function LoginRegister() {
         <div className="mb-4">
           <label className="font-bold text-grey-darker block mb-2">Phone No</label>
           <input type="text" className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow" placeholder="Phone"
-          name='phno' value={phno} onChange={e=>onChange(e)} required />
+          name='phone' value={phone} onChange={e=>onChange(e)} required />
         </div>
 
         <div className="flex items-center justify-between">
-          <Link to='/otpVerify'className="bg-blue-50 hover:bg-blue-500 text-black font-bold py-2 px-4 rounded" onClick={e=>onClick(e)}>Confirm</Link>
+          <button className="bg-blue-50 hover:bg-blue-500 text-black font-bold py-2 px-4 rounded" onClick={e=>onClick1(e)}>Confirm</button>
+        </div>
+        <div className="mb-4">
+          <label className="font-bold text-grey-darker block mb-2">OTP</label>
+          <input type="text" className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow" placeholder="one time password"
+          name='otp' value={otp} onChange={e=>onChange(e)} required />
+        </div>
+        <div className="flex items-center justify-between">
+          <button className="bg-blue-50 hover:bg-blue-500 text-black font-bold py-2 px-4 rounded" onClick={e=>onClick2(e)}>Login</button>
         </div>
       </div>
       
