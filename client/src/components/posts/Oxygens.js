@@ -2,16 +2,18 @@ import React,{Fragment,useEffect} from 'react'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getPosts} from '../../actions/oxygenPost';
+import Spinner from '../Spinner';
 
 
 const Oxygens = ({getPosts,post:{posts,loading}}) => {
     useEffect(()=>{
       getPosts();  
     },[getPosts]);
-    return (
-        <div>
+
+    return loading ? (<Spinner/>):(
+        <Fragment>
             
-        </div>
+        </Fragment>
     )
 }
 
