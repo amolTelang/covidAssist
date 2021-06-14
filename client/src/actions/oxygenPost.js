@@ -12,6 +12,7 @@ import axios from 'axios';
 export const getPosts=()=> async dispatch=>{
 try {
     const res=await axios.get('/api/posts/oxygen');
+    console.log(res.data);
     dispatch({
         type:GET_POST,
         payload:res.data

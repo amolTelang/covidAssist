@@ -26,7 +26,7 @@ export default function(state=initialState,action){
         case GET_POST:
             return{
                 ...state,
-                posts:[payload,...state.post],
+                posts:[payload,...state.posts],
                 loading:false
             }
         case ERROR:

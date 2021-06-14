@@ -8,6 +8,7 @@ import OxygenForm from './OxygenForm';
 
 const Oxygens = ({getPosts,post:{posts,loading}}) => {
     useEffect(()=>{
+
       getPosts();  
     },[getPosts]);
 
