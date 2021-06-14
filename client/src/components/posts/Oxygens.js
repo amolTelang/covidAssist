@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getPosts} from '../../actions/oxygenPost';
 import Spinner from '../Spinner';
-
+import OxygenItem from './OxygenItem';
 
 const Oxygens = ({getPosts,post:{posts,loading}}) => {
     useEffect(()=>{
@@ -12,7 +12,15 @@ const Oxygens = ({getPosts,post:{posts,loading}}) => {
 
     return loading ? (<Spinner/>):(
         <Fragment>
-            
+             <h1 className="large text-primary">Posts</h1>
+      <p className="lead">
+        <i className="fas fa-user" /> 
+      </p>
+      <div className="posts">
+        {posts.map((post) => (
+          <OxygenItem key={post._id} post={post} />
+        ))}
+      </div>
         </Fragment>
     )
 }

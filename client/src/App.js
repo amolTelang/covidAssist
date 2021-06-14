@@ -1,5 +1,6 @@
 import React,{useEffect} from 'react';
 import './App.css';
+import './basic.css';
 import {BrowserRouter as Router , Route, Switch} from 'react-router-dom';
 import Navbar from "./components/Navbar"
 import Landing from "./components/Landing"
