@@ -10,9 +10,6 @@ const client=require('twilio')(accountSid,authToken);
 const twilioNum = process.env.TWILIO_PHONE_NUMBER;
 const jwt = require('jsonwebtoken');
 const JWT_AUTH_TOKEN=process.env.JWT_AUTH_TOKEN;
-const JWT_REFRESH_TOKEN=process.env.JWT_REFRESH_TOKEN;
-let refreshTokens = [];
-const authenticateUser=require('../../middleware/auth')
 const smsKey=process.env.SMS_SECRET_KEY;
 const auth=require('../../middleware/auth');
 const User=require('../../models/User');
@@ -86,9 +83,10 @@ router.post('/verifyOTP', async(req, res) => {
 				id:user.id
 			}
 		};
+
 		
 		
-		 jwt.sign(payload, JWT_AUTH_TOKEN, { expiresIn: '30s' },(err,token)=>{
+		 jwt.sign(payload, JWT_AUTH_TOKEN, { expiresIn: '60000s' },(err,token)=>{
 			if(err) throw err;
 			res.json({token});
 		});

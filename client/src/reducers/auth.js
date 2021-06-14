@@ -1,7 +1,8 @@
 import {
     SEND_OTP,
     VERIFY_OTP,
-   FAIL
+   FAIL,
+   LOAD_USER
   } from '../actions/types';
  
 
@@ -29,6 +30,13 @@ import {
           ...payload,
           isAuthenticated: true,
           loading:false
+        }
+    case LOAD_USER:
+        return{
+            ...state,
+            isAuthenticated:true,
+            loading:false,
+            user:payload
         }
       case FAIL:
           localStorage.removeItem('token');

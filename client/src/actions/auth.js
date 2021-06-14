@@ -2,25 +2,31 @@ import axios from 'axios';
 import{
    SEND_OTP,
    VERIFY_OTP,
-   FAIL
+   FAIL,
+   LOAD_USER
 } from './types';
-
+import setAuthToken from '../utils/setAuthToken';
 var hash;
 
 //load user
-// export const loadUser=()=>async dispatch=>{
-//     try {
-//         dispatch({
-//             type:LOAD_USER
-//         })
-//     } catch (error) {
-//         dispatch({
-//             type:LOGIN_FAIL,
+export const loadUser=()=>async dispatch=>{
+    if(localStorage.token){
+        setAuthToken(localStorage.token)
+    }
+    try {
+        const res=await axios.get('/api/users')
+        dispatch({
+            type:LOAD_USER,
+            payload:res.data
+        })
+    } catch (error) {
+        dispatch({
+            type:FAIL,
 
-//         });
-//         console.error(error.response.data);
-//     }
-// }
+        });
+        console.error(error.response.data);
+    }
+}
 
 //get otp
 export const getOtp=({ userName,phone})=> async dispatch=>{
@@ -37,6 +43,8 @@ export const getOtp=({ userName,phone})=> async dispatch=>{
         dispatch({
             type: SEND_OTP,
         });
+    
+        dispatch(loadUser());
     } catch (error) {
         dispatch({
             type:FAIL
@@ -60,6 +68,8 @@ export const verifyOtp=({userName,phone,otp})=>async dispatch=>{
             type: VERIFY_OTP,
             payload:res.data
         });
+       
+        dispatch(loadUser());
     } catch (error) {
         dispatch({
             type:FAIL
