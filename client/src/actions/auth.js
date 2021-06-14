@@ -36,6 +36,8 @@ export const getOtp=({ userName,phone})=> async dispatch=>{
             'Content-Type':'application/json'
         }
     }
+    const code="+91";
+    phone=code.concat(phone);
     const body=JSON.stringify({userName,phone});
     try {
         const res=await axios.post('/api/users/sendOTP',body,config);
@@ -61,7 +63,8 @@ export const verifyOtp=({userName,phone,otp})=>async dispatch=>{
             'Content-Type':'application/json'
         }
     }
-    
+    const code="+91";
+    phone=code.concat(phone);
     const body=JSON.stringify({userName,phone,hash,otp});
     try {
         const res=await axios.post('/api/users/verifyOTP',body,config);
