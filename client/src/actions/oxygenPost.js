@@ -1,7 +1,6 @@
 import {
     ERROR,
     GET_POST,
-    GET_POSTS,
     SEND_POSTS
 } from '../actions/types';
 
