@@ -1,13 +1,26 @@
 import axios from 'axios';
 import{
-    LOAD_USER,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL
+   SEND_OTP,
+   VERIFY_OTP,
+   FAIL
 } from './types';
 
 var hash;
 
 //load user
+// export const loadUser=()=>async dispatch=>{
+//     try {
+//         dispatch({
+//             type:LOAD_USER
+//         })
+//     } catch (error) {
+//         dispatch({
+//             type:LOGIN_FAIL,
+
+//         });
+//         console.error(error.response.data);
+//     }
+// }
 
 //get otp
 export const getOtp=({ userName,phone})=> async dispatch=>{
@@ -20,14 +33,13 @@ export const getOtp=({ userName,phone})=> async dispatch=>{
     try {
         const res=await axios.post('/api/users/sendOTP',body,config);
         hash=res.data.hash;
+
         dispatch({
-            type: LOGIN_SUCCESS,
-            payload:res.data
+            type: SEND_OTP,
         });
     } catch (error) {
         dispatch({
-            type:LOGIN_FAIL,
-
+            type:FAIL
         });
         console.error(error.response.data);
     }
@@ -40,17 +52,17 @@ export const verifyOtp=({userName,phone,otp})=>async dispatch=>{
             'Content-Type':'application/json'
         }
     }
+    
     const body=JSON.stringify({userName,phone,hash,otp});
     try {
         const res=await axios.post('/api/users/verifyOTP',body,config);
         dispatch({
-            type: LOAD_USER,
+            type: VERIFY_OTP,
             payload:res.data
         });
     } catch (error) {
         dispatch({
-            type:LOGIN_FAIL,
-
+            type:FAIL
         });
         console.error(error.response.data);
     }

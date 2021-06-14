@@ -23,12 +23,13 @@ const LoginRegister=({getOtp,verifyOtp,isAuthenticated})=> {
         getOtp({userName,phone});
     }
     const onClick2=async e=>{
-        verifyOtp({userName,phone,hash,otp})
+        verifyOtp({userName,phone,otp})
      }
 
      //redirect 
      if(isAuthenticated)
      {
+         console.log(isAuthenticated);
         return <Redirect to='/oxygen'/>
      }
     return (
@@ -68,13 +69,13 @@ const LoginRegister=({getOtp,verifyOtp,isAuthenticated})=> {
 
     );
 };
-
-const mapStateToProps=state=>({
-    isAuthenticated:state.auth.isAuthenticated
-})
 LoginRegister.propTypes={
     getOtp:PropTypes.func.isRequired,
     verifyOtp:PropTypes.func.isRequired,
-    isAuthenticated:PropTypes.bool.isRequired
+    isAuthenticated:PropTypes.bool
 };
+const mapStateToProps=state=>({
+    isAuthenticated:state.auth.isAuthenticated
+})
+
 export default connect (null,{getOtp,verifyOtp})(LoginRegister);

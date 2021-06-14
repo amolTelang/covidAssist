@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './App.css';
 import {BrowserRouter as Router , Route, Switch} from 'react-router-dom';
 import Navbar from "./components/Navbar"
@@ -11,8 +11,8 @@ import store from './store';
 
 
 
-const App=()=>{
-  return (
+
+const App=()=>(
     <Provider store={store}>
     <Router>
         <Route exact path='/' component={Landing}/>
@@ -22,6 +22,6 @@ const App=()=>{
      
     </Router>
     </Provider>
-  )}
+  );
 
 export default App;

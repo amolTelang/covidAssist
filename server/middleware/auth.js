@@ -3,26 +3,29 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 //env of refresh token
-const JWT_REFRESH_TOKEN =process.env.JWT_REFRESH_TOKEN;
-
+const JWT_ACCESS_TOKEN=process.env.JWT_ACCESS_TOKEN;
 
 //auth function to check  the token 
-module.exports=async function authenticateUser(req, res, next) {
-	const accessToken = req.cookies.refreshToken;
+module.exports=async function (req, res, next) {
+	const token = req.header('x-auth-token');
 
-    // console.log(req);
-	jwt.verify(accessToken, JWT_REFRESH_TOKEN, async (err,decoded) => {
-		if (decoded) {
-			req.user = decoded.user;
-			next();
-		} else if (err.message === 'TokenExpiredError') {
-			return res.status(403).send({
-				success: false,
-				msg: 'Access token expired'
-			});
+	// Check if not token
+	if (!token) {
+	  return res.status(401).json({ msg: 'No token, authorization denied' });
+	}
+  
+	// Verify token
+	try {
+	  jwt.verify(token, JWT_ACCESS_TOKEN, (error, decoded) => {
+		if (error) {
+		  return res.status(401).json({ msg: 'Token is not valid' });
 		} else {
-			console.log(err);
-			return res.status(403).send({ err, msg: 'User not authenticated' });
+		  req.user = decoded.user;
+		  next();
 		}
-	});
+	  });
+	} catch (err) {
+	  console.error('something wrong with auth middleware');
+	  res.status(500).json({ msg: 'Server Error' });
+	}
 }
