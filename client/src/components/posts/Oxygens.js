@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {getPosts} from '../../actions/oxygenPost';
 import Spinner from '../Spinner';
 import OxygenItem from './OxygenItem';
+import OxygenForm from './OxygenForm';
 
 const Oxygens = ({getPosts,post:{posts,loading}}) => {
     useEffect(()=>{
@@ -16,6 +17,7 @@ const Oxygens = ({getPosts,post:{posts,loading}}) => {
       <p className="lead">
         <i className="fas fa-user" /> 
       </p>
+      <OxygenForm></OxygenForm>
       <div className="posts">
         {posts.map((post) => (
           <OxygenItem key={post._id} post={post} />

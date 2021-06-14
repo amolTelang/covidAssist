@@ -1,7 +1,8 @@
 import {
     ERROR,
     GET_POST,
-    SEND_POSTS
+    ADD_POST,
+    DELETE_POST
 } from '../actions/types';
 
 import axios from 'axios';
@@ -18,8 +19,51 @@ try {
 } catch (error) {
     dispatch({
         type:ERROR,
-        payload:{msg:error.response.statusText,status:error.response.status}
+        payload:{msg:error.response}
     });
     
 }
+}
+
+//delete post
+export const deletePost=id=> async dispatch=>{
+    try {
+        await axios.delete(`api/posts/oxygen/${id}`);
+    
+        dispatch({
+          type: DELETE_POST,
+          payload: id
+        });
+    
+        
+      } catch (err) {
+        dispatch({
+          type: ERROR,
+          payload: { msg: err.response.statusText, status: err.response.status }
+        });
+      }
+}
+
+//add post
+export const addPost=formData=> async dispatch=>{
+    const config={
+        headers:{
+            'Content-Type':'application/json'
+        }
+    }
+    try {
+        const res=await axios.post(`api/posts/oxygen`,formData,config);
+    
+        dispatch({
+          type: ADD_POST,
+          payload: res.data
+        });
+    
+        
+      } catch (err) {
+        dispatch({
+          type: ERROR,
+          payload: { msg: err.response.statusText, status: err.response.status }
+        });
+      }
 }
