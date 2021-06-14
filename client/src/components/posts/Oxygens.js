@@ -13,11 +13,10 @@ const Oxygens = ({getPosts,post:{posts,loading}}) => {
 
     return loading ? (<Spinner/>):(
         <Fragment>
-             <h1 className="large text-primary">Posts</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> 
-      </p>
-      <OxygenForm></OxygenForm>
+       <div class="flex flex-col text-center w-full mb-20">
+      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">lorem ipsu bfcsbvvfdhjbvhsdbvhudbrsvndfgbvjkdfhbvhdfgb</p>
+    </div>
+      <OxygenForm/>
       <div className="posts">
         {posts.map((post) => (
           <OxygenItem key={post._id} post={post} />

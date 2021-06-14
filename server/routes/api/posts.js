@@ -56,7 +56,7 @@ router.post('/shelterAssist',auth,async(req,res)=>{
     
         const newPost=new Post({
             user:req.user.id,
-            name:req.body.name,
+            userName:req.body.userName,
             location:req.body.location,
             quantity:req.body.quantity,
             phone:req.body.phone,
@@ -86,10 +86,11 @@ router.post('/oxygenAssist',auth,async(req,res)=>{
     try {
        
         const user=await User.findById(req.user.id);
-    
+        console.log("exec");
+        console.log(req.body);
         const newPost=new Post({
             user:req.user.id,
-            name:req.body.name,
+            userName:req.body.userName,
             location:req.body.location,
             quantity:req.body.quantity,
             phone:req.body.phone,

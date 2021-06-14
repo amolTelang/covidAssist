@@ -45,15 +45,17 @@ export const deletePost=id=> async dispatch=>{
 }
 
 //add post
-export const addPost=formData=> async dispatch=>{
+export const addPost=({userName,phone,location,quantity,price,lastTimeVerified})=> async dispatch=>{
     const config={
         headers:{
             'Content-Type':'application/json'
         }
     }
+    const body=JSON.stringify({userName,phone,location,quantity,price,lastTimeVerified});
+    console.log(body);
     try {
-        const res=await axios.post(`api/posts/oxygen`,formData,config);
-    
+        const res=await axios.post(`api/posts/oxygenAssist`,body,config);
+        
         dispatch({
           type: ADD_POST,
           payload: res.data
@@ -63,7 +65,7 @@ export const addPost=formData=> async dispatch=>{
       } catch (err) {
         dispatch({
           type: ERROR,
-          payload: { msg: err.response.statusText, status: err.response.status }
+          payload: { msg: err.message }
         });
       }
 }

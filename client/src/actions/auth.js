@@ -47,7 +47,6 @@ export const getOtp=({ userName,phone})=> async dispatch=>{
             type: SEND_OTP,
         });
     
-        dispatch(loadUser());
     } catch (error) {
         dispatch({
             type:FAIL
