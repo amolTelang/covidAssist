@@ -6,7 +6,7 @@ import Landing from "./components/Landing"
 import LoginRegister from "./components/auth/LoginRegister";
 import Oxygen from "./components/posts/Oxygen";
 import Medicine from "./components/posts/Medicine"
-import Beds from "./components/posts/Beds"
+import Beds from "./components/posts/Bed"
 
 //redux
 import {Provider} from 'react-redux';
