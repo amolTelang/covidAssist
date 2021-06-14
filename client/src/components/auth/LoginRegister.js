@@ -26,10 +26,9 @@ const LoginRegister=({getOtp,verifyOtp,isAuthenticated})=> {
         verifyOtp({userName,phone,otp})
      }
 
-     //redirect 
+     //redirect if logged in
      if(isAuthenticated)
      {
-         console.log(isAuthenticated);
         return <Redirect to='/oxygen'/>
      }
     return (
@@ -78,4 +77,4 @@ const mapStateToProps=state=>({
     isAuthenticated:state.auth.isAuthenticated
 })
 
-export default connect (null,{getOtp,verifyOtp})(LoginRegister);
+export default connect (mapStateToProps,{getOtp,verifyOtp})(LoginRegister);

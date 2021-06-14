@@ -2,7 +2,8 @@ import {
     SEND_OTP,
     VERIFY_OTP,
    FAIL,
-   LOAD_USER
+   LOAD_USER,
+   LOGOUT
   } from '../actions/types';
  
 
@@ -39,6 +40,7 @@ import {
             user:payload
         }
       case FAIL:
+       case  LOGOUT:
           localStorage.removeItem('token');
           return{
               ...state,

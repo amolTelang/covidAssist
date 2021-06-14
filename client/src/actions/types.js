@@ -2,5 +2,6 @@
  export const VERIFY_OTP='VERIFY_OTP';
  export const FAIL='FAIL';
  export const LOAD_USER='LOAD_USER';
+ export const LOGOUT='LOGOUT';
 
 
