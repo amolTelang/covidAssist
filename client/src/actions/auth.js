@@ -3,7 +3,8 @@ import{
    SEND_OTP,
    VERIFY_OTP,
    FAIL,
-   LOAD_USER
+   LOAD_USER,
+   LOGOUT
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 var hash;
@@ -76,4 +77,9 @@ export const verifyOtp=({userName,phone,otp})=>async dispatch=>{
         });
         console.error(error.response.data);
     }
+}
+
+//logout
+export const userLogout=()=>dispatch=>{
+    dispatch({type:LOGOUT})
 }

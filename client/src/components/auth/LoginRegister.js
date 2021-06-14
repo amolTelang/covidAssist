@@ -35,7 +35,7 @@ const LoginRegister=({getOtp,verifyOtp,isAuthenticated})=> {
         <div className="bg-grey-lighter h-screen font-sans">
   <div className="container mx-auto h-full flex justify-center items-center">
     <div className="w-1/3">
-      <h1 className="font-hairline mb-6 text-center">Login to our Website</h1>
+      <h1 className="font-hairline mb-6 text-center">Login with your Phone No</h1>
       <div className="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
         <div className="mb-4">
           <label className="font-bold text-grey-darker block mb-2">Name</label>
