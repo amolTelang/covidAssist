@@ -18,9 +18,9 @@ const Oxygens = ({getPosts,post:{posts,loading}}) => {
       <p className="lg:w-2/3 mx-auto leading-relaxed text-base">lorem ipsu bfcsbvvfdhjbvhsdbvhudbrsvndfgbvjkdfhbvhdfgb</p>
     </div>
       <OxygenForm/>
-      <div className="posts">
-        {console.log(posts)}
+      <div>
         {posts.map((post) => (
+          
           <OxygenItem key={post._id} post={post} />
         ))}
       </div>
@@ -33,7 +33,7 @@ getPosts:PropTypes.func.isRequired,
 post:PropTypes.object.isRequired,
 }
 const mapStateToProps=state=>({
-post: state.post
+post: state.oxygenPost
 });
 
 export default connect(mapStateToProps,{getPosts})(Oxygens)

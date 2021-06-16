@@ -12,7 +12,7 @@ import axios from 'axios';
 export const getPosts=()=> async dispatch=>{
 try {
     const res=await axios.get('/api/posts/oxygen');
-    console.log(res.data);
+  
     dispatch({
         type:GET_POST,
         payload:res.data
@@ -53,7 +53,7 @@ export const addPost=({userName,phone,location,quantity,price,lastTimeVerified})
         }
     }
     const body=JSON.stringify({userName,phone,location,quantity,price,lastTimeVerified});
-    console.log(body);
+   
     try {
         const res=await axios.post(`api/posts/oxygenAssist`,body,config);
         
