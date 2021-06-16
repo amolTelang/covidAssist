@@ -4,6 +4,7 @@ import {
     ADD_POST,
     DELETE_POST
 } from '../actions/types';
+import {setAlert} from './alert';
 
 import axios from 'axios';
 
@@ -17,10 +18,15 @@ try {
         type:GET_POST,
         payload:res.data
     });
-} catch (error) {
+} catch (err) {
+  const errors=err.response.data.errors;
+  if(errors)
+  {
+      errors.forEach(error=>dispatch(setAlert(error.msg,`fail`)))
+  }
     dispatch({
         type:ERROR,
-        payload:{msg:error.response}
+        payload:{msg:err.response}
     });
     
 }
@@ -38,6 +44,11 @@ export const deletePost=id=> async dispatch=>{
     
         
       } catch (err) {
+        const errors=err.response.data.errors;
+        if(errors)
+        {
+            errors.forEach(error=>dispatch(setAlert(error.msg,`fail`)))
+        }
         dispatch({
           type: ERROR,
           payload: { msg: err.response.statusText, status: err.response.status }
@@ -62,8 +73,13 @@ export const addPost=({userName,phone,location,quantity,price,lastTimeVerified})
           payload: res.data
         });
     
-        
+        dispatch(setAlert(`post sent`,`success`));
       } catch (err) {
+        const errors=err.response.data.errors;
+        if(errors)
+        {
+            errors.forEach(error=>dispatch(setAlert(error.msg,`fail`)))
+        }
         dispatch({
           type: ERROR,
           payload: { msg: err.message }

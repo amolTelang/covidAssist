@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar"
 import Landing from "./components/Landing"
 import LoginRegister from "./components/auth/LoginRegister";
 import Oxygens from "./components/posts/Oxygens";
+import Alert from "./components/Alert";
 // import Medicine from "./components/posts/Medicine"
 // import Beds from "./components/posts/Bed"
 
@@ -30,6 +31,7 @@ const App=()=>{
       <Fragment>
       <Navbar/>
         <Route exact path='/' component={Landing}/>
+        <Alert/>
           <Switch>
           <Route exact path="/login" component={LoginRegister}/>
           

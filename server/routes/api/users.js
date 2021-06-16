@@ -13,6 +13,7 @@ const JWT_AUTH_TOKEN=process.env.JWT_AUTH_TOKEN;
 const smsKey=process.env.SMS_SECRET_KEY;
 const auth=require('../../middleware/auth');
 const User=require('../../models/User');
+const {check,validationResult}=require('express-validator');
 
 //load user by token
 router.get('/', auth, async (req, res) => {
@@ -20,15 +21,21 @@ router.get('/', auth, async (req, res) => {
 	  const user = await User.findById(req.user.id);
 	  res.json(user);
 	} catch (error) {
-	  console.error(error.message);
-	  res.status(500).send('Server Error');
+	  
+	  return res.status(400).json({ errors: [{msg:'server error'}] });
 	}
   });
 
 //@router POST api/sendOTP
 //@desc Register user
 //@access public
-router.post('/sendOTP', (req, res) => {
+router.post('/sendOTP',check('userName','Name is required').not().isEmpty(),
+check('phone','Phone No is required').not().isEmpty(),async(req, res) => {
+	const errors=validationResult(req);
+	if(!errors.isEmpty())
+    {
+      return res.status(400).json({errors:errors.array()});
+    }
 	const userName=req.body.userName;
 	const phone = req.body.phone;
 	const otp = Math.floor(100000 + Math.random() * 900000);
@@ -47,8 +54,8 @@ router.post('/sendOTP', (req, res) => {
 		.then((messages) => console.log(messages))
 		.catch((err) => console.error(err));
 
-	// // res.status(200).send({ phone, hash: fullHash, otp });  // this bypass otp via api only for development instead hitting twilio api all the time
-	 res.status(200).send({ phone, hash: fullHash,otp,userName });          // Use this way in Production
+	
+	 res.status(200).send({ phone, hash: fullHash,otp,userName });          
 });
 
 //@router POST api/verifyOTP
@@ -63,7 +70,7 @@ router.post('/verifyOTP', async(req, res) => {
 
 	let now = Date.now();
 	if (now > parseInt(expires)) {
-		return res.status(504).send({ msg: 'Timeout. Please try again' });
+		return res.status(400).json({ errors: [{msg:'Time Out Please Try again'}] });
 	}
 	let data = `${phone}.${otp}.${expires}`;
 	let newCalculatedHash = crypto.createHmac('sha256', smsKey).update(data).digest('hex');
@@ -87,13 +94,12 @@ router.post('/verifyOTP', async(req, res) => {
 		
 		
 		 jwt.sign(payload, JWT_AUTH_TOKEN, { expiresIn: '60000s' },(err,token)=>{
-			if(err) throw err;
+			if(err) return res.status(400).json({ errors: [{msg:'incorrect Phone No'}] });
 			res.json({token});
 		});
 			
 	} else {
-		console.log('not authenticated');
-		return res.status(400).send({ verification: false, msg: 'Incorrect OTP' });
+		return res.status(400).json({ errors: [{msg:'incorrect OTP'}] });
 	}
 });
 

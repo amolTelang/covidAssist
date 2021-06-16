@@ -7,6 +7,7 @@ import{
    LOGOUT
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
+import {setAlert} from './alert';
 var hash;
 
 //load user
@@ -20,12 +21,12 @@ export const loadUser=()=>async dispatch=>{
             type:LOAD_USER,
             payload:res.data
         })
-    } catch (error) {
+    } catch (err) {
         dispatch({
             type:FAIL,
 
         });
-        console.error(error.response.data);
+       
     }
 }
 
@@ -47,11 +48,16 @@ export const getOtp=({ userName,phone})=> async dispatch=>{
             type: SEND_OTP,
         });
     
-    } catch (error) {
+    } catch (err) {
+        const errors=err.response.data.errors;
+        if(errors)
+        {
+            errors.forEach(error=>dispatch(setAlert(error.msg,`fail`)))
+        }
         dispatch({
             type:FAIL
         });
-        console.error(error.response.data);
+        
     }
 }
 
@@ -73,11 +79,16 @@ export const verifyOtp=({userName,phone,otp})=>async dispatch=>{
         });
        
         dispatch(loadUser());
-    } catch (error) {
+    } catch (err) {
+        const errors=err.response.data.errors;
+        if(errors)
+        {
+            errors.forEach(error=>dispatch(setAlert(error.msg,`fail`)))
+        }
         dispatch({
             type:FAIL
         });
-        console.error(error.response.data);
+        
     }
 }
 
