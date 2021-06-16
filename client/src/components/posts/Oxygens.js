@@ -14,11 +14,12 @@ const Oxygens = ({getPosts,post:{posts,loading}}) => {
 
     return loading ? (<Spinner/>):(
         <Fragment>
-       <div class="flex flex-col text-center w-full mb-20">
-      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">lorem ipsu bfcsbvvfdhjbvhsdbvhudbrsvndfgbvjkdfhbvhdfgb</p>
+       <div className="flex flex-col text-center w-full mb-20">
+      <p className="lg:w-2/3 mx-auto leading-relaxed text-base">lorem ipsu bfcsbvvfdhjbvhsdbvhudbrsvndfgbvjkdfhbvhdfgb</p>
     </div>
       <OxygenForm/>
       <div className="posts">
+        {console.log(posts)}
         {posts.map((post) => (
           <OxygenItem key={post._id} post={post} />
         ))}
@@ -32,7 +33,7 @@ getPosts:PropTypes.func.isRequired,
 post:PropTypes.object.isRequired,
 }
 const mapStateToProps=state=>({
-post: state.oxygenPost
+post: state.post
 });
 
 export default connect(mapStateToProps,{getPosts})(Oxygens)

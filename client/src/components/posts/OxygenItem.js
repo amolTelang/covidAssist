@@ -8,11 +8,7 @@ import {deletePost} from '../../actions/oxygenPost';
 const OxygenItem = ({auth,deletePost,post:{_id,user,userName,location,quantity,phone,price,lastTimeVerified}}) => {
 
     return (
-  <div class="container px-5 py-24 mx-auto flex flex-col justify-items-center  ">
-  <div class="flex flex-wrap -m-2">
-    <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-      <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-        <div class="flex-grow">
+      <div>
           <h2 class="text-gray-900 title-font font-medium">{userName}</h2>
           <h2 class="text-gray-900 title-font font-medium">{phone}</h2>
           <h2 class="text-gray-900 title-font font-medium">{quantity}</h2>
@@ -28,12 +24,8 @@ const OxygenItem = ({auth,deletePost,post:{_id,user,userName,location,quantity,p
               Delete
             </button>
           )}
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-
+   
+   </div>
 
          
     )
