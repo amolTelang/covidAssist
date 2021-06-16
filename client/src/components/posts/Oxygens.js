@@ -14,8 +14,8 @@ const Oxygens = ({getPosts,post:{posts,loading}}) => {
 
     return loading ? (<Spinner/>):(
         <Fragment>
-       <div className="flex flex-col text-center w-full mb-20">
-      <p className="lg:w-2/3 mx-auto leading-relaxed text-base">lorem ipsu bfcsbvvfdhjbvhsdbvhudbrsvndfgbvjkdfhbvhdfgb</p>
+       <div className="flex flex-col text-center w-full mb-20 bg-blue-400">
+      <p className="lg:w-2/3 mx-auto leading-relaxed text-base">lorem ipsum</p>
     </div>
       <OxygenForm/>
       <div>

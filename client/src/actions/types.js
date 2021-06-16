@@ -7,7 +7,7 @@
  export const ADD_POST='ADD_POST';
  export const DELETE_POST='DELETE_POST';
  export const ERROR='ERROR';
- export const SET_ALERT='SET_ERROR';
+ export const SET_ALERT='SET_ALERT';
  export const REMOVE_ALERT='REMOVE_ALERT';
  
 
