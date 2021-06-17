@@ -64,7 +64,7 @@ export const addPost=({userName,phone,address,quantity,price,lastTimeVerified,do
         }
     }
     const body=JSON.stringify({userName,phone,address,quantity,price,lastTimeVerified,docrequired,typeOfMedicine});
-   
+   console.log(body);
     try {
         const res=await axios.post(`api/posts/medicineAssist`,body,config);
         

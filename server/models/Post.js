@@ -29,6 +29,9 @@ const PostSchema=new Schema({
     homedelivery:{
         type:String
     },
+    typeOfMedicine:{
+        type:String
+    },
     docrequired:{
         type:String
     },

@@ -11,7 +11,7 @@ const OxygenForm = ({addPost}) => {
         quantity:'',
         price:'',
         lastTimeVerified:'',
-        docsrequired:'',
+        docrequired:'',
         typeOfMedicine:''
     });
 
@@ -20,6 +20,7 @@ const OxygenForm = ({addPost}) => {
     return (
        
       <div class="flex justify-center items-center h-screen w-full bg-blue-400">
+          <h1>text</h1>
       <div class="w-1/2 bg-white rounded shadow-2xl p-8 m-4">
         <h1 class="block w-full text-center text-gray-800 text-2xl font-bold mb-6">Details</h1>
         <form   onSubmit={e => {

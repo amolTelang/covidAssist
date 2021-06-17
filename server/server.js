@@ -1,7 +1,11 @@
+
+//setting up express
 const express = require('express');
+//middleware to connect to db
 const connectDB=require('./config/db');
+//cross platform compatibility
 const cors=require('cors');
-const cookieParser = require('cookie-parser');
+
 
 //init express
 const app=express();
@@ -9,7 +13,7 @@ const app=express();
 
 //enable cross platfrom service
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
-app.use(cookieParser());
+
 
 //connect database
 connectDB();
