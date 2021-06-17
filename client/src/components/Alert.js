@@ -71,4 +71,4 @@ alerts:state.alert
 })
 
 //exporting
-export default connect(mapStateToProps)( Alert);
+export default connect(mapStateToProps)(Alert);

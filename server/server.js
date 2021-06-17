@@ -6,7 +6,6 @@ const connectDB=require('./config/db');
 //cross platform compatibility
 const cors=require('cors');
 
-
 //init express
 const app=express();
 

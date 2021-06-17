@@ -6,7 +6,8 @@ import Landing from "./components/Landing"
 import LoginRegister from "./components/auth/LoginRegister";
 import Oxygens from "./components/posts/Oxygens";
 import Alert from "./components/Alert";
-import Medicine from "./components/posts/Medicine"
+import Medicine from "./components/posts/Medicine";
+import Developer from "./components/Developer";
 
 
 //redux
@@ -34,7 +35,7 @@ const App=()=>{
         <Alert/>
           <Switch>
           <Route exact path="/login" component={LoginRegister}/>
-          
+          <Route exact path="/developers" component={Developer}/>
             <Route exact path="/oxygen" component={Oxygens}/>
             <Route exact path="/medicine" component={Medicine}/>
     

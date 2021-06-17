@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import {connect} from 'react-redux';
 import {deletePost} from '../../actions/oxygenPost';
 
-const OxygenItem = ({auth,deletePost,post:{_id,user,userName,location,quantity,phone,price,lastTimeVerified,date}}) => {
+const OxygenItem = ({auth,deletePost,post:{_id,user,userName,address,quantity,phone,price,lastTimeVerified,date,docrequired,typeOfMedicine}}) => {
 
     return (
 
@@ -22,16 +22,24 @@ const OxygenItem = ({auth,deletePost,post:{_id,user,userName,location,quantity,p
         <p class="border py-2 px-3 text-grey-800" >{phone}</p>
       </div>
       <div class="flex flex-col mb-4">
-        <label class="mb-2 font-bold text-lg text-gray-900" for="quantity">Quantity</label>
+        <label class="mb-2 font-bold text-lg text-gray-900" for="quantity">Medicines Available</label>
+        <p class="border py-2 px-3 text-grey-800" >{typeOfMedicine}</p>
+      </div>
+      <div class="flex flex-col mb-4">
+        <label class="mb-2 font-bold text-lg text-gray-900" for="price">Quantity</label>
         <p class="border py-2 px-3 text-grey-800" >{quantity}</p>
       </div>
       <div class="flex flex-col mb-4">
-        <label class="mb-2 font-bold text-lg text-gray-900" for="price">Price</label>
+        <label class="mb-2 font-bold text-lg text-gray-900" for="location">Price</label>
         <p class="border py-2 px-3 text-grey-800" >{price}</p>
       </div>
       <div class="flex flex-col mb-4">
-        <label class="mb-2 font-bold text-lg text-gray-900" for="location">Location</label>
-        <p class="border py-2 px-3 text-grey-800" >{location}</p>
+        <label class="mb-2 font-bold text-lg text-gray-900" for="location">Documents Required</label>
+        <p class="border py-2 px-3 text-grey-800" >{docrequired}</p>
+      </div>
+      <div class="flex flex-col mb-4">
+        <label class="mb-2 font-bold text-lg text-gray-900" for="location">Address</label>
+        <p class="border py-2 px-3 text-grey-800" >{address}</p>
       </div>
       <div class="flex flex-col mb-4">
         <label class="mb-2 font-bold text-lg text-gray-900">Last Time Verified</label>

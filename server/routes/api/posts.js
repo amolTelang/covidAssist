@@ -13,7 +13,7 @@ const User=require('../../models/User');
 router.get('/oxygen',auth,async(req,res)=>{
     try {
         //get all the post related to oxygen requests
-        const posts=await Post.find().sort({date :-1});
+        const posts=await Post.find().find({otype:'oxygen'}).sort({date :-1});
         //return the object in the form of JSON
         res.json(posts);  
     } catch (error) {
@@ -29,7 +29,7 @@ router.get('/oxygen',auth,async(req,res)=>{
 router.get('/medicine',auth,async(req,res)=>{
     try {
         //get all the post related to medicine
-        const posts=await Post.find().sort({date :-1});
+        const posts=await Post.find().find({otype:'medicine'}).sort({date :-1});
         //return in the form of JSON
         res.json(posts);  
     } catch (error) {
@@ -54,6 +54,7 @@ router.post('/oxygenAssist',auth,async(req,res)=>{
         //create a new onject from Post and populate it with the details from request object
         const newPost=new Post({
             user:req.user.id,
+            price:req.body.price,
             userName:req.body.userName,
             location:req.body.location,
             quantity:req.body.quantity,
@@ -99,6 +100,7 @@ router.post('/medicineAssist',auth,async(req,res)=>{
             price:req.body.price,
             phone:req.body.phone,
             docrequired:req.body.docrequired,
+            lastTimeVerified:req.body.lastTimeVerified,
             otype:otype
         });
 
