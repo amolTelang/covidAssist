@@ -1,5 +1,9 @@
+
+//importing mongoose
 const mongoose=require('mongoose');
+//setting up schema
 const Schema=mongoose.Schema;
+//creating the Post object
 const PostSchema=new Schema({
     user:{
         type:Schema.Types.ObjectId,
@@ -51,4 +55,6 @@ const PostSchema=new Schema({
 
 });
 
+
+//exporting the model
 module.exports=mongoose.model(`post`,PostSchema); 

@@ -19,10 +19,12 @@ module.exports= function (req, res, next) {
 	// Verify token
 	try {
 	  const decoded=jwt.verify(token, JWT_AUTH_TOKEN);
-	
+		//decode the user id
 		req.user=decoded.user;
+		//return with the modified req object
 		next();
 	} catch (err) {
+		//display if any error
 	  console.error('something wrong with auth middleware');
 	  res.status(500).json({ msg: 'Server Error' });
 	}
