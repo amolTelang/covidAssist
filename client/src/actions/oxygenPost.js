@@ -57,13 +57,13 @@ export const deletePost=id=> async dispatch=>{
 }
 
 //add post
-export const addPost=({userName,phone,location,quantity,price,lastTimeVerified})=> async dispatch=>{
+export const addPost=({userName,phone,location,quantity,price,lastTimeVerified,homedelivery})=> async dispatch=>{
     const config={
         headers:{
             'Content-Type':'application/json'
         }
     }
-    const body=JSON.stringify({userName,phone,location,quantity,price,lastTimeVerified});
+    const body=JSON.stringify({userName,phone,location,quantity,price,lastTimeVerified,homedelivery});
    
     try {
         const res=await axios.post(`api/posts/oxygenAssist`,body,config);

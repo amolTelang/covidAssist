@@ -10,10 +10,11 @@ const OxygenForm = ({addPost}) => {
         location:'',
         quantity:'',
         price:'',
-        lastTimeVerified:''
+        lastTimeVerified:'',
+        homedelivery:''
     });
 
-    const{userName,phone,location,quantity,price,lastTimeVerified}=formData
+    const{userName,phone,location,quantity,price,lastTimeVerified,homedelivery}=formData
     const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value});
     return (
        
@@ -22,7 +23,7 @@ const OxygenForm = ({addPost}) => {
         <h1 class="block w-full text-center text-gray-800 text-2xl font-bold mb-6">Details</h1>
         <form   onSubmit={e => {
           e.preventDefault();
-          addPost({userName,phone,location,quantity,price,lastTimeVerified});
+          addPost({userName,phone,location,quantity,price,lastTimeVerified,homedelivery});
         }}>
           <div class="flex flex-col mb-4">
             <label class="mb-2 font-bold text-lg text-gray-900" for="first_name">Name</label>
@@ -43,6 +44,10 @@ const OxygenForm = ({addPost}) => {
           <div class="flex flex-col mb-4">
             <label class="mb-2 font-bold text-lg text-gray-900" for="location">Address</label>
             <input class="border py-2 px-3 text-grey-800" type="text" name="location" id="location" value={location} onChange={e=>onChange(e)} />
+          </div>
+          <div class="flex flex-col mb-4">
+            <label class="mb-2 font-bold text-lg text-gray-900" for="location">Home Devlivery Available</label>
+            <input class="border py-2 px-3 text-grey-800" type="text" name="homedelivery" id="location" value={homedelivery} onChange={e=>onChange(e)} />
           </div>
           <div class="flex flex-col mb-4">
             <label class="mb-2 font-bold text-lg text-gray-900" for="lastTimeVerified">Last Time Verified</label>

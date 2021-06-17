@@ -53,7 +53,8 @@ router.post('/oxygenAssist',auth,async(req,res)=>{
             quantity:req.body.quantity,
             phone:req.body.phone,
             homedelivery:req.body.homedelivery,
-            lastTimeVerified:req.body.lastTimeVerified
+            lastTimeVerified:req.body.lastTimeVerified,
+            otype:otype
         });
 
         //return post object to database

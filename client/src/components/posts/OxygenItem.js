@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import {connect} from 'react-redux';
 import {deletePost} from '../../actions/oxygenPost';
 
-const OxygenItem = ({auth,deletePost,post:{_id,user,userName,location,quantity,phone,price,lastTimeVerified,date}}) => {
+const OxygenItem = ({auth,deletePost,post:{_id,user,userName,location,quantity,phone,price,lastTimeVerified,date,homedelivery}}) => {
 
     return (
 
@@ -32,6 +32,10 @@ const OxygenItem = ({auth,deletePost,post:{_id,user,userName,location,quantity,p
       <div class="flex flex-col mb-4">
         <label class="mb-2 font-bold text-lg text-gray-900" for="location">Location</label>
         <p class="border py-2 px-3 text-grey-800" >{location}</p>
+      </div>
+      <div class="flex flex-col mb-4">
+        <label class="mb-2 font-bold text-lg text-gray-900" for="location">Home Delivery Available</label>
+        <p class="border py-2 px-3 text-grey-800" >{homedelivery}</p>
       </div>
       <div class="flex flex-col mb-4">
         <label class="mb-2 font-bold text-lg text-gray-900">Last Time Verified</label>
