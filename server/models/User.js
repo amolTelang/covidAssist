@@ -12,8 +12,42 @@ const UserSchema=new Schema({
         type:String,
         required:true,
         unique:true
-    }
-
+    },
+    Email:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    orders:{
+        type:String,
+        required:true,
+        unique:false
+    },
+    Address:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    Availablility:{
+        type:Boolean,
+        required:true
+    },
+    Reviews:{
+        type:[]
+        required:true
+    },
+    spaceLeft:{
+        type:Integer,
+        required:true
+    },
+    spaceUsed:{
+        type:Integer,
+        required:true
+    },
+    AmountReceived:{
+        type:String,
+        required:true
+    },
 });
 
 //exporting user module
