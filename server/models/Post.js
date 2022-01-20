@@ -9,22 +9,19 @@ const PostSchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:'users'
     },
-    orders:{
+    ordersPending:{
         type:String,
     },
-    location:{
+    address:{
         type:String
     },
-    quantity:{
+    ordersCompleted:{
         type:String
     },
-    type:{
+    ratings:{
         type:String
     },
-    orders:{
-        type:String
-    },
-    name:{
+    availability:{
         type:String
     },
     phoneNo:{
