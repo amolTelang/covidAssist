@@ -9,7 +9,7 @@ const PostSchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:'users'
     },
-    userName:{
+    orders:{
         type:String,
     },
     location:{
@@ -18,22 +18,16 @@ const PostSchema=new Schema({
     quantity:{
         type:String
     },
-    address:{
-        type:String
-    },
-    phone:{
-        type:String
-    },
     type:{
         type:String
     },
-    price:{
+    orders:{
         type:String
     },
-    homedelivery:{
+    name:{
         type:String
     },
-    typeOfMedicine:{
+    phoneNo:{
         type:String
     },
     docrequired:{
@@ -45,13 +39,6 @@ const PostSchema=new Schema({
     text:{
         type:String
     },
-    otype:{
-        type:String
-    },
-    date:{
-        type:Date,
-        default:Date.now
-    }
 
 });
 
